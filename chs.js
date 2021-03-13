@@ -39,7 +39,7 @@ var cnItems = {
     'Shrinks Zone Diamonds': '缩小区域方块尺寸',
     'Shrinks Ramp Width': '缩小坡道长度',
     'Confirm': '确认',
-    '': '',
+    'Saved!': '已保存!',
     '': '',
     '': '',
     '': '',
