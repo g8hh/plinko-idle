@@ -123,7 +123,7 @@ $(document).ready(function () {
         break;
       case 3:
         try {
-          localStorage.removeItem('save');
+          localStorage.removeItem('plinkosave');
         } catch (e) {
           
         }
@@ -1325,13 +1325,13 @@ function save() {
     time: Date.now()
   }
   if (typeof(Storage) !== "undefined") {
-    localStorage.setItem('save', JSON.stringify(obj))
+    localStorage.setItem('plinkosave', JSON.stringify(obj))
   }
 }
 
 function load() {
   if (typeof(Storage) !== "undefined") {
-    let save = JSON.parse(localStorage.getItem('save'))
+    let save = JSON.parse(localStorage.getItem('plinkosave'))
     if (save) {
       currentScore = new Decimal(save.money || 0)
       totalScore = new Decimal(save.totalMoney || 0)
