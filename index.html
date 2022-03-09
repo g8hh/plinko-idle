@@ -1,23 +1,52 @@
 <html>
   <head>
-   <meta charset="utf-8">
     <link rel="stylesheet" href="./CSS/game.css" />
-    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
-<script src="//g8hh.com/static/js/jquery.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/phaser/3.17.0/phaser.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/decimal.js/9.0.0/decimal.min.js"></script>
+    <script src="JS/cpmstar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/9.0.0/decimal.min.js"></script>
+    <script src="JS/GameAnalytics.js"></script>
     <script src="JS/data/spawns.js?123"></script>
     <script src="JS/data/tokens.js?123"></script>
+    <script src="JS/analytics.js"></script>
+    <script src="JS/manager.js?123"></script>
     <script src="JS/game.js?123"></script>
-    <title>掉了个球 - Plinko Idle</title>
   </head>
   <body>
-<script src="chs.js?202106041511"></script>
-<script src="//g8hh.com/zh/core.js"></script>
     <div id="wrapperContainer">
       <div id="wrapper"></div>
     </div>
+    <script>
+      /* Interstitial auto-preloading */
+      var rAd;
+      cpmstarAPI(function(api) {  
+        api.game.setContentID('7534S7F98E846');    
+        // api.game.setTarget(document.getElementById("wrapperContainer"));                      
+        rAd = new api.game.RewardedVideoView("rewardedvideo");
+        rAd.load();
+        if(rAd) {
+          rAd.addEventListener("ad_opened", function(e) {        
+            if (scene.adManager) {
+              scene.adManager.playingAd = true
+            }        
+          });
+          rAd.addEventListener("ad_closed", function(e) {              
+            setTimeout(function() {
+              if (scene.adManager) {
+                scene.adManager.completeAd()
+              }  
+            },700);
+            rAd.load();
+          });
+        }
+      });
 
+      function displayRewardedVideo() {      
+        if(rAd && rAd.isLoaded()) rAd.show(); //Show loaded ad
+        else if(rAd) rAd.load(); //If no ad available, load another
+      }
+    </script>
     <div id="menuContainer" style="display: none;">
       <div id="offlineProgress" style="display: none;">
         <div id='offlineText'></div>
@@ -239,26 +268,8 @@
         </div>
       </div>
     </div>
-<!--客服 开始-->
-<link rel="stylesheet" href="//g8hh.com/static/css/kf.css" type="text/css" media="screen" charset="utf-8">
-<script src="//g8hh.com/static/js/kf.js"></script>
-<style>
-    body{
-        position: relative;
-        margin: 0 auto;
-        width: 1108px;
-    }
-    #menuContainer{
-    }
-    canvas{
-        margin: 50px auto;
-        display: block;
-    }      
- </style>
-<!-- 客服 结束 -->
- <!--站长统计-->
-    <div style="display: none">
-        <script type="text/javascript" src="//s13.cnzz.com/z_stat.php?id=1266957935&web_id=1266957935"></script>
-    </div>
+    <script>
+      GAObject = new analytics("af28f597c7f84ad6ac8a431ee13d37ad", "151697647efd03883cfa42f9d9257ebb22611abf")
+    </script>
   </body>
 </html>
